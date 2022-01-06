@@ -13,7 +13,7 @@ namespace Business.Models
         
         private Player _currentPlayer;
         public Player Winner { get; private set; }
-        private Board _mainBoard;
+        public Board _mainBoard;
 
         public bool GameOver { get; private set; }
 
@@ -28,26 +28,23 @@ namespace Business.Models
             // this.ResetGame();
         }
 
-        public void CheckShifts(int boxPosition)
+
+        // revisar nombre
+        public void CheckPlay(int boxPosition)
         {
-            if (!GameOver)
+            if (!this.GameOver)
             {
                 this.Play(boxPosition);
-
-                if (this.CheckWin())
-                {
-                    this.Winner = this._currentPlayer;
-                    this.GameOver = true;
-                }
+                this.CheckWin();               
+                this.ChecKBoardFull();  // empate        
                 this.TogglePlayer();
             }
-
-            if (this._mainBoard.IsFull()) this.GameOver = true;
         }
 
         public void Play(int boxPosition)
         {
-             this._mainBoard.PaintBox(boxPosition, _currentPlayer.Id);
+            this._mainBoard.PaintBox(boxPosition, _currentPlayer.Id) ;
+        
         }
 
         public void TogglePlayer()
@@ -57,26 +54,22 @@ namespace Business.Models
                 : this._playerOne;
         }
 
-        private bool CheckWin() {
-            return this._mainBoard.GetLines().Any(line => this.CheckLine(line));
-            
-            /*
-            bool status = false;
+        private void CheckWin() {
 
-            foreach (int[] line in this.MainBoard.GetLines())
+            if(this._mainBoard.GetLines().Any(line => this.CheckLine(line)))
             {
-                status = line.All(x => x == this.CurrentPlayer.Id);
-                
-                if (status) return status;
-            }
-
-            return status;
-            */
+                this.Winner = this._currentPlayer;
+                this.GameOver = true;
+            };
         }
 
         private bool CheckLine(int[] line) {
             return line.All(box => box == this._currentPlayer.Id);
         }
 
+        public void ChecKBoardFull()
+        {
+            this.GameOver = this._mainBoard.IsFull() ? true : this.GameOver;
+        }
     }
 }

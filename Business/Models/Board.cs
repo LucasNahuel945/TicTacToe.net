@@ -8,7 +8,7 @@ namespace Business.Models
 {
     public class Board
     {
-        private int[] _grid { get; set; }
+        public int[] _grid { get; set; }
 
         public Board()
         {
@@ -17,8 +17,30 @@ namespace Business.Models
 
         public void PaintBox(int position, int playerId)
         {
-            if(this.BoxIsEmpty(position)) _grid[position - 1] = playerId;
+            if (this.BoxIsEmpty(position)) _grid[position - 1] = playerId;
+
         }
+
+        //revisar 
+        
+        //public bool PaintBox(int position, int playerId)
+        //{
+        //    if (this.BoxIsEmpty(position))
+        //    {
+        //        _grid[position - 1] = playerId;
+        //        return true;
+        //    }        
+        //     return false;        
+        //}
+
+        //public bool PaintBox(int position, int playerId)
+        //{
+        //    bool boxIsPainted = !this.BoxIsEmpty(position);
+
+        //    if (!boxIsPainted) _grid[position - 1] = playerId;
+
+        //    return boxIsPainted;
+        //}
 
         public bool BoxIsEmpty(int position)
         {
