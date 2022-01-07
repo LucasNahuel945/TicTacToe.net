@@ -1,79 +1,59 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Models
 {
     public class Board
     {
-        public int[] _grid { get; set; }
+        public int[] Grid { get; private set; }
 
         public Board()
         {
-            this.Reset();
+            this.Grid = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         }
 
-        public void PaintBox(int position, int playerId)
+        public bool PaintBox(int position, int playerId)
         {
-            if (this.BoxIsEmpty(position)) _grid[position - 1] = playerId;
-
+            if (this.IsAValidPosition(position - 1) && this.BoxIsEmpty(position - 1))
+            {
+                Grid[position - 1] = playerId;
+                return true;
+            }
+            return false;
         }
 
-        //revisar 
-        
-        //public bool PaintBox(int position, int playerId)
-        //{
-        //    if (this.BoxIsEmpty(position))
-        //    {
-        //        _grid[position - 1] = playerId;
-        //        return true;
-        //    }        
-        //     return false;        
-        //}
-
-        //public bool PaintBox(int position, int playerId)
-        //{
-        //    bool boxIsPainted = !this.BoxIsEmpty(position);
-
-        //    if (!boxIsPainted) _grid[position - 1] = playerId;
-
-        //    return boxIsPainted;
-        //}
-
-        public bool BoxIsEmpty(int position)
+        private bool BoxIsEmpty(int position)
         {
-            return this._grid[position - 1] == 0;
+            return this.Grid[position] == 0;
+        }
+
+        private bool IsAValidPosition(int position)
+        {
+            return (position < this.Grid.Length) && (position >= 0);
         }
 
         public bool IsFull()
         {
-            return this._grid.All(x => x != 0);
-        }
-
-        public void Reset()
-        {
-            this._grid = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            return this.Grid.All(x => x != 0);
         }
 
         public List<int[]> GetLines()
         {
             List<int[]> lines = new List<int[]>();
 
-            // Filas
-            lines.Add(new int[] { this._grid[0], this._grid[1], this._grid[2] });
-            lines.Add(new int[] { this._grid[3], this._grid[4], this._grid[5] });
-            lines.Add(new int[] { this._grid[6], this._grid[7], this._grid[8] });
+            // Rows
+            lines.Add(new int[] { this.Grid[0], this.Grid[1], this.Grid[2] });
+            lines.Add(new int[] { this.Grid[3], this.Grid[4], this.Grid[5] });
+            lines.Add(new int[] { this.Grid[6], this.Grid[7], this.Grid[8] });
 
-            // Columas
-            lines.Add(new int[] { this._grid[0], this._grid[3], this._grid[6] });
-            lines.Add(new int[] { this._grid[1], this._grid[4], this._grid[7] });
-            lines.Add(new int[] { this._grid[2], this._grid[5], this._grid[8] });
+            // Columns
+            lines.Add(new int[] { this.Grid[0], this.Grid[3], this.Grid[6] });
+            lines.Add(new int[] { this.Grid[1], this.Grid[4], this.Grid[7] });
+            lines.Add(new int[] { this.Grid[2], this.Grid[5], this.Grid[8] });
 
-            // Diagonales
-            lines.Add(new int[] { this._grid[0], this._grid[4], this._grid[8] });
-            lines.Add(new int[] { this._grid[2], this._grid[4], this._grid[6] });
+            // Diagonals
+            lines.Add(new int[] { this.Grid[0], this.Grid[4], this.Grid[8] });
+            lines.Add(new int[] { this.Grid[2], this.Grid[4], this.Grid[6] });
 
             return lines;
         }
