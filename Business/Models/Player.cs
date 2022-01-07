@@ -16,5 +16,7 @@
             this.Id = id;
             this.IsPlaying = isPlaying;
         }
+
+        
     }
 }

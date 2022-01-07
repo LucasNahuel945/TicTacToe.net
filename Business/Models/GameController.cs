@@ -22,26 +22,38 @@ namespace Business.Models
             this.GameOver = false;
         }
 
-        public void PlayOnceTime(int boxPosition)
+        public bool PlayOnceTime(int boxPosition)
         {
             if (!this.GameOver)
             {
-                this.PaintBoxInBoard(boxPosition);
-                this.CheckWinner();               
-                this.UpdateGameStatus();  // empate        
-                this.UpdateCurrentPlayer();
+                if (this.PaintBoxInBoard(boxPosition))
+                {
+                    this.CheckWinner();
+                    this.UpdateGameStatus();  // empate        
+                    this.UpdateCurrentPlayer();
+                    return true;
+                }
             }
+            return false;
         }
 
-        public void PaintBoxInBoard(int boxPosition)
+        public bool PaintBoxInBoard(int boxPosition)
         {
+
             _currentPlayer.IsPlaying = this.MainBoard
                 .PaintBox(boxPosition, _currentPlayer.Id);
+
+            if (!_currentPlayer.IsPlaying)
+            {
+                return false;
+            }
+            return true;
+
         }
 
         private void UpdateCurrentPlayer()
         {
-            if (!this._currentPlayer.IsPlaying) this.TogglePlayer();
+            if (this._currentPlayer.IsPlaying) this.TogglePlayer();
         }
         public void TogglePlayer()
         {
@@ -75,5 +87,11 @@ namespace Business.Models
         {
             this.GameOver = this.MainBoard.IsFull() ? true : this.GameOver;
         }
+        public int getIdCurrentPlayer()
+        {
+            return this._currentPlayer.Id;
+        }
+
+
     }
 }
