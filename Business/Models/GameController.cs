@@ -13,7 +13,7 @@ namespace Business.Models
         public bool GameOver { get; private set; }
 
         public GameController() {
-            this._playerOne = new Player(1, true);
+            this._playerOne = new Player(1);
             this._playerTwo = new Player(2);
             this._currentPlayer = _playerOne;
 
@@ -24,37 +24,22 @@ namespace Business.Models
 
         public bool PlayOnceTime(int boxPosition)
         {
-            if (!this.GameOver)
+            if (!this.GameOver && this.PaintBoxInBoard(boxPosition))
             {
-                if (this.PaintBoxInBoard(boxPosition))
-                {
-                    this.CheckWinner();
-                    this.UpdateGameStatus();  // empate        
-                    this.UpdateCurrentPlayer();
-                    return true;
-                }
+                this.CheckWinner();
+                this.UpdateGameStatus();
+                this.TogglePlayer();
+                return true;
             }
+
             return false;
         }
 
         public bool PaintBoxInBoard(int boxPosition)
         {
-
-            _currentPlayer.IsPlaying = this.MainBoard
-                .PaintBox(boxPosition, _currentPlayer.Id);
-
-            if (!_currentPlayer.IsPlaying)
-            {
-                return false;
-            }
-            return true;
-
+            return this.MainBoard.PaintBox(boxPosition, _currentPlayer.Id);
         }
 
-        private void UpdateCurrentPlayer()
-        {
-            if (this._currentPlayer.IsPlaying) this.TogglePlayer();
-        }
         public void TogglePlayer()
         {
             this._currentPlayer = (this._currentPlayer.Equals(_playerOne))
