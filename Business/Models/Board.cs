@@ -59,12 +59,20 @@ namespace Business.Models
             return lines;
         }
 
-        public void PrintBoard()
+        //public string PrintBoard()
+        //{
+        //    string grid = "";
+        //    for (int i = 0; i < 9; i ++)
+        //    {
+        //        grid += _grid[i].ToString();
+
+        //    }
+        //    return grid;
+        //}
+
+        public int[] GetBoard()
         {
-            for (int i = 0; i < 9; i += 3)
-            {
-                Console.WriteLine(_grid[i] + " " + _grid[i + 1] + " " + _grid[i + 2]);
-            }
+            return this._grid;
         }
     }
 }

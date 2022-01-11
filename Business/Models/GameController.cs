@@ -72,7 +72,7 @@ namespace Business.Models
         {
             this.GameOver = this.MainBoard.IsFull() ? true : this.GameOver;
         }
-        public int getIdCurrentPlayer()
+        public int GetIdCurrentPlayer()
         {
             return this._currentPlayer.Id;
         }

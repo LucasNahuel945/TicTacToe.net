@@ -28,7 +28,7 @@ namespace ConsoleApp
             game.PlayOnceTime(2);
             game.PlayOnceTime(9);
             game.PlayOnceTime(3);
-            game.MainBoard.PrintBoard();
+            //game.MainBoard.PrintBoard();
             Console.WriteLine("Game 1 = " + game.Winner.Id);
         }
 
@@ -44,7 +44,7 @@ namespace ConsoleApp
             game2.PlayOnceTime(6);
             game2.PlayOnceTime(9);
             game2.PlayOnceTime(8);
-            game2.MainBoard.PrintBoard();
+            //game2.MainBoard.PrintBoard();
 
             if (game2.Winner == null)
             {
@@ -75,27 +75,35 @@ namespace ConsoleApp
             {
                 int num = rand.Next(1, 9);
                 //int num =Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Juagdor " + game.getIdCurrentPlayer() +": "+ (num-1));
+                Console.WriteLine("Juagdor " + game.GetIdCurrentPlayer() + ": " + (num - 1));
 
                 if (!game.PlayOnceTime(num))
                 {
                     Console.WriteLine("Turno inavlido, vuelva a tirar");
                 }
-                game.MainBoard.PrintBoard();
-                    
+                PrintBoard(game.MainBoard.GetBoard());               
+
             }
 
-            if(game.Winner == null)
+            if (game.Winner == null)
             {
                 Console.WriteLine("Se lleno el tablero");
             }
             else
             {
-                Console.WriteLine("Gano jugador : " +game.Winner.Id);
+                Console.WriteLine("Gano jugador : " + game.Winner.Id);
             }
         }
 
 
+        public static void PrintBoard(int[] grid)
+        {
+            for (int i = 0; i < 9; i += 3)
+            {
+                Console.WriteLine(grid[i] + " " + grid[i + 1] + " " + grid[i + 2]);
+            }
+
+        } 
     }
 }
 

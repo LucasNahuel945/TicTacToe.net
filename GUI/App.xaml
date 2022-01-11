@@ -5,20 +5,26 @@ xmlns:local="clr-namespace:GUI"
 StartupUri="View/TicTacToeView.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <Style TargetType="{x:Type Button}">
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="Foreground" Value="White"/>
-                <Setter Property="FontSize" Value="70"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
+            <Style TargetType="Button" x:Key="RestartButton">
+                <Setter Property="Background" Value="#ee6c4d"/>
+                <Setter Property="Foreground" Value="#293241"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style TargetType="Button" x:Key="GridButton">
+                <Setter Property="Background" Value="#e0fbfc"/>
+                <Setter Property="Foreground" Value="#293241"/>
+                <Setter Property="FontSize" Value="100"/>
+                
 
+            </Style>
+            <Style TargetType="Label" x:Key="GetCurrentPlayer">
+                <!--<Setter Property="Background" Value="Aqua"/>-->
+                <Setter Property="Foreground" Value="#293241"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                <Setter Property="Margin" Value="0,5,0,0"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontWeight" Value="Bold"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

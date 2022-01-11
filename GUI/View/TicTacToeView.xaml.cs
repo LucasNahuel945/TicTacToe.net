@@ -1,17 +1,11 @@
 ﻿using GUI.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.IO;
+
 
 namespace GUI.View
 {
@@ -23,32 +17,31 @@ namespace GUI.View
         private TicTacToeViewModel _vm;
         public TicTacToeView()
         {
+            InitializeComponent();
+            StartMusic();
             this._vm = new TicTacToeViewModel();
+            DataContext = this._vm;           
+
         }
 
 
         private void NumberButton_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
-            var position = Convert.ToInt32(btn.Tag);
-            if (this._vm.Game(position))
+            var position = Convert.ToInt32(btn.Tag);           
+            if (this._vm.ExecuteMovement(position))
             {
                 PaintView(btn);
-                btn.Foreground = new SolidColorBrush(Colors.Black);
             }
             else
             {
                 MessageBox.Show("La Casilla ya se encuentra pintada, volve a intentar!", "Error");
             }
 
-            if (_vm._game.GameOver)
+            var message = _vm.MessageGameEnded();
+            if (message != null)
             {
-                var message = this._vm.MessageStatusGame();
-                if(message != "")
-                {
-                    Message(message);
-                }
-
+                MessageBoxShow(message);
             }
         }
 
@@ -58,26 +51,58 @@ namespace GUI.View
             {
                 sender.Content = "X";
 
-            } else { 
+            } else {
 
                 sender.Content = "O";
             }
         }
 
 
-        public void Message(string message)
+        public void MessageBoxShow(string message)
         {
             MessageBoxResult result = MessageBox.Show(message, "TicTacToe", MessageBoxButton.YesNo);
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    //hay que reiniciar
+                    ResetGame();
+                    //this._vm.Reset();    
                     break;
                 case MessageBoxResult.No:
-                    MessageBox.Show("Oh well, too bad!", "My App");
+                    this.Close();
+                    //Application.Current.MainWindow.Close();
                     break;
 
             }
         }
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            //_vm.Reset();
+            ResetGame();
+        }
+
+        //public void ResetV()
+        //{
+        //    this._vm = new TicTacToeViewModel();
+        //    DataContext = this._vm;
+
+        //}
+
+        public void ResetGame()
+        {
+            new TicTacToeView().Show();
+            this.Close();
+        }
+
+        public void StartMusic()
+        {
+            string path = Path.GetFullPath("..\\..\\Music\\musicaFondo.wav");
+            string uri = path;
+            SoundPlayer player = new SoundPlayer(uri);
+            player.Play();
+        }
+
+
+
     }
 }
