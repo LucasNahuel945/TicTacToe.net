@@ -28,9 +28,9 @@ namespace GUI.ViewModels
 
         public bool ExecuteMovement(int position)
         {
-            bool CanPlay = _game.PlayOnceTime(Convert.ToInt32(position));
-            this.GetCurrentPlayer = _getCurrentPlayer;
-            return CanPlay;
+            bool canPlay = _game.PlayOnceTime(Convert.ToInt32(position));
+            this.CurrentPlayer = _game.GetIdCurrentPlayer();
+            return canPlay;
         }
 
         public string? MessageGameEnded()
@@ -50,67 +50,166 @@ namespace GUI.ViewModels
             return status;
         }
 
-        private string _getCurrentPlayer;
-        public string GetCurrentPlayer
+        private int _currentPlayer;
+        public int CurrentPlayer
         {
             get
             {
-                if(_game.GetIdCurrentPlayer() == 1)
-                {
-                    return "1 Ficha: X";
-                }
-                else
-                {
-                    return "2 Ficha: O ";
-                }
+                return _currentPlayer;
             }
             set
             {
-                _getCurrentPlayer = value;
-                OnPropertyChanged(nameof(GetCurrentPlayer));
+                _currentPlayer = value;
+                OnPropertyChanged(nameof(CurrentPlayer));
+                OnPropertyChanged(nameof(PrintCurrentPlayer));
             }
         }
 
-        //public void PaintView(Button sender)
-        //{
-        //    if (_game.GetIdCurrentPlayer() == 2)
-        //    {
-        //        sender.Content = "X";
-        //        this.ContentButton = sender.Content.ToString();
+        private string _printcurrentPlayer;
+        public string PrintCurrentPlayer
+        {
+            get
+            {
+                if (_currentPlayer == 1)
+                {
+                    _printcurrentPlayer = "1 Ficha: X";                 
 
-        //    }
-        //    else
-        //    {
+                }
+                else
+                {
+                    _printcurrentPlayer = "2 Ficha: O ";
+                }
 
-        //        sender.Content = "O";
-        //        this.ContentButton = sender.Content.ToString();
-        //    }
-        //}
+                
+                return _printcurrentPlayer;
+            }
+        }
 
+        //TODO - PARA HACER EL BINDING A LOS BOTONES
+        /*private string _contentButton1;
+        private string _contentButton2;
+        private string _contentButton3;
+        private string _contentButton4;
+        private string _contentButton5;
+        private string _contentButton6;
+        private string _contentButton7;
+        private string _contentButton8;
+        private string _contentButton9;
 
-        
-        //TODO - actualizar botones
-        //private string _contentButton;
-
-        //public string ContentButton
-        //{
-        //    get
-        //    {
-        //        return this._contentButton;
-        //    }
-        //    set
-        //    {
-        //        this._contentButton = value;
-        //        OnPropertyChanged(nameof(ContentButton));
-        //    }
-        //}
+        public string ContentButton1
+        {
+            get
+            {
+                return this._contentButton1;
+            }
+            set
+            {
+                this._contentButton1 = value;
+                OnPropertyChanged(nameof(ContentButton1));
+            }
+        }
+        public string ContentButton2
+        {
+            get
+            {
+                return this._contentButton2;
+            }
+            set
+            {
+                this._contentButton2 = value;
+                OnPropertyChanged(nameof(ContentButton2));
+            }
+        }
+        public string ContentButton3
+        {
+            get
+            {
+                return this._contentButton3;
+            }
+            set
+            {
+                this._contentButton3 = value;
+                OnPropertyChanged(nameof(ContentButton3));
+            }
+        }
+        public string ContentButton4
+        {
+            get
+            {
+                return this._contentButton4;
+            }
+            set
+            {
+                this._contentButton4 = value;
+                OnPropertyChanged(nameof(ContentButton4));
+            }
+        }
+        public string ContentButton5
+        {
+            get
+            {
+                return this._contentButton5;
+            }
+            set
+            {
+                this._contentButton5 = value;
+                OnPropertyChanged(nameof(ContentButton5));
+            }
+        }
+        public string ContentButton6
+        {
+            get
+            {
+                return this._contentButton6;
+            }
+            set
+            {
+                this._contentButton6 = value;
+                OnPropertyChanged(nameof(ContentButton6));
+            }
+        }
+        public string ContentButton7
+        {
+            get
+            {
+                return this._contentButton7;
+            }
+            set
+            {
+                this._contentButton7 = value;
+                OnPropertyChanged(nameof(ContentButton7));
+            }
+        }
+        public string ContentButton8
+        {
+            get
+            {
+                return this._contentButton8;
+            }
+            set
+            {
+                this._contentButton8 = value;
+                OnPropertyChanged(nameof(ContentButton8));
+            }
+        }
+        public string ContentButton9
+        {
+            get
+            {
+                return this._contentButton9;
+            }
+            set
+            {
+                this._contentButton9 = value;
+                OnPropertyChanged(nameof(ContentButton9));
+            }
+        }*/
 
         public void Reset()
         {
-            //this.ContentButton = "6";
+            this.CurrentPlayer = 1;
             this._game = new GameController();
         }
-
 
     }
 }

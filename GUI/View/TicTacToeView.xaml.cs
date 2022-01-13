@@ -5,7 +5,7 @@ using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.IO;
-
+using System.Collections.Generic;
 
 namespace GUI.View
 {
@@ -15,15 +15,20 @@ namespace GUI.View
     public partial class TicTacToeView : Window
     {
         private TicTacToeViewModel _vm;
+        private Dictionary<int, string> _symbolplayer;
         public TicTacToeView()
         {
             InitializeComponent();
             StartMusic();
             this._vm = new TicTacToeViewModel();
-            DataContext = this._vm;           
+            DataContext = this._vm;
+            
+            this._symbolplayer = new Dictionary<int,string>();
+            this._symbolplayer.Add(1, "X");
+            this._symbolplayer.Add(2, "O");
+
 
         }
-
 
         private void NumberButton_Click(object sender, RoutedEventArgs e)
         {
@@ -32,6 +37,7 @@ namespace GUI.View
             if (this._vm.ExecuteMovement(position))
             {
                 PaintView(btn);
+                btn.IsEnabled = false;
             }
             else
             {
@@ -45,15 +51,16 @@ namespace GUI.View
             }
         }
 
+
         private void PaintView(Button sender)
         {
             if (_vm._game.GetIdCurrentPlayer() == 2)
             {
-                sender.Content = "X";
-
-            } else {
-
-                sender.Content = "O";
+                sender.Content= this._symbolplayer[1];
+            }
+            else
+            {
+                sender.Content = this._symbolplayer[2];
             }
         }
 
@@ -64,12 +71,10 @@ namespace GUI.View
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    ResetGame();
-                    //this._vm.Reset();    
+                    ResetGame(); 
                     break;
                 case MessageBoxResult.No:
                     this.Close();
-                    //Application.Current.MainWindow.Close();
                     break;
 
             }
@@ -77,16 +82,9 @@ namespace GUI.View
 
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
-            //_vm.Reset();
             ResetGame();
         }
 
-        //public void ResetV()
-        //{
-        //    this._vm = new TicTacToeViewModel();
-        //    DataContext = this._vm;
-
-        //}
 
         public void ResetGame()
         {

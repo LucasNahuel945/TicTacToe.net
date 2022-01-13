@@ -15,8 +15,8 @@ StartupUri="View/TicTacToeView.xaml">
                 <Setter Property="Background" Value="#e0fbfc"/>
                 <Setter Property="Foreground" Value="#293241"/>
                 <Setter Property="FontSize" Value="100"/>
-                
-
+                <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             </Style>
             <Style TargetType="Label" x:Key="GetCurrentPlayer">
                 <!--<Setter Property="Background" Value="Aqua"/>-->
@@ -26,6 +26,8 @@ StartupUri="View/TicTacToeView.xaml">
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="FontWeight" Value="Bold"/>
             </Style>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

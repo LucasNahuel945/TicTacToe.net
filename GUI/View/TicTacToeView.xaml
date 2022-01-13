@@ -24,19 +24,19 @@
             <Label Content="Turno del Jugador " Style="{StaticResource GetCurrentPlayer}"   />
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1" Background="#98c1d9" >
-            <Label Content="{Binding GetCurrentPlayer, Mode=OneWay}" Style="{StaticResource GetCurrentPlayer}"  HorizontalAlignment="Center" ></Label>
+            <Label Content="{Binding PrintCurrentPlayer, Mode=OneWay}" Style="{StaticResource GetCurrentPlayer}"  HorizontalAlignment="Center" ></Label>
         </StackPanel>
 
         <Button Grid.Row="0" Grid.Column="3" Content="Reiniciar Juego" Style="{StaticResource RestartButton}" Click="RestartButton_Click"></Button>
-        <Button Grid.Row="1" Grid.Column="0" Content="{Binding ContentButton, Mode=Default}" Click="NumberButton_Click" Tag="1" Style="{StaticResource GridButton}"></Button>
-        <Button Grid.Row="1" Grid.Column="1" Content="{Binding ContentButton, Mode=Default}" Click="NumberButton_Click" Tag="2" Style="{StaticResource GridButton}"></Button>
-        <Button Grid.Row="1" Grid.Column="2" Content="{Binding ContentButton, Mode=Default}" Click="NumberButton_Click" Tag="3" Style="{StaticResource GridButton}"></Button>
-        <Button Grid.Row="2" Grid.Column="0" Content="{Binding ContentButton, Mode=Default}" Click="NumberButton_Click" Tag="4" Style="{StaticResource GridButton}"></Button>
-        <Button Grid.Row="2" Grid.Column="1" Content="{Binding ContentButton, Mode=Default}" Click="NumberButton_Click" Tag="5" Style="{StaticResource GridButton}"></Button>
-        <Button Grid.Row="2" Grid.Column="2" Content="{Binding ContentButton, Mode=Default}" Click="NumberButton_Click" Tag="6" Style="{StaticResource GridButton}"></Button>
-        <Button Grid.Row="3" Grid.Column="0" Content="{Binding ContentButton, Mode=Default}" Click="NumberButton_Click" Tag="7" Style="{StaticResource GridButton}"></Button>
-        <Button Grid.Row="3" Grid.Column="1" Content="{Binding ContentButton, Mode=Default}" Click="NumberButton_Click" Tag="8" Style="{StaticResource GridButton}"></Button>
-        <Button Grid.Row="3" Grid.Column="2" Content="{Binding ContentButton, Mode=Default}" Click="NumberButton_Click" Tag="9" Style="{StaticResource GridButton}"></Button>
+        <Button Grid.Row="1" Grid.Column="0" Content="{Binding ContentButton1, Mode=OneWay}" Click="NumberButton_Click" Tag="1" Style="{StaticResource GridButton}" IsEnabled="True"></Button>
+        <Button Grid.Row="1" Grid.Column="1" Content="{Binding ContentButton2, Mode=OneWay}" Click="NumberButton_Click" Tag="2" Style="{StaticResource GridButton}" IsEnabled="True"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="{Binding ContentButton3, Mode=OneWay}" Click="NumberButton_Click" Tag="3" Style="{StaticResource GridButton}" IsEnabled="True"></Button>
+        <Button Grid.Row="2" Grid.Column="0" Content="{Binding ContentButton4, Mode=OneWay}" Click="NumberButton_Click" Tag="4" Style="{StaticResource GridButton}" IsEnabled="True"></Button>
+        <Button Grid.Row="2" Grid.Column="1" Content="{Binding ContentButton5, Mode=OneWay}" Click="NumberButton_Click" Tag="5" Style="{StaticResource GridButton}" IsEnabled="True"></Button>
+        <Button Grid.Row="2" Grid.Column="2" Content="{Binding ContentButton6, Mode=OneWay}" Click="NumberButton_Click" Tag="6" Style="{StaticResource GridButton}" IsEnabled="True"></Button>
+        <Button Grid.Row="3" Grid.Column="0" Content="{Binding ContentButton7, Mode=OneWay}" Click="NumberButton_Click" Tag="7" Style="{StaticResource GridButton}" IsEnabled="True"></Button>
+        <Button Grid.Row="3" Grid.Column="1" Content="{Binding ContentButton8, Mode=OneWay}" Click="NumberButton_Click" Tag="8" Style="{StaticResource GridButton}" IsEnabled="True"></Button>
+        <Button Grid.Row="3" Grid.Column="2" Content="{Binding ContentButton9, Mode=OneWay}" Click="NumberButton_Click" Tag="9" Style="{StaticResource GridButton}" IsEnabled="True"></Button>
 
 
 
