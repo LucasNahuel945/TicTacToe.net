@@ -30,7 +30,7 @@ namespace GUI.ViewModels
         {
             bool canPlay = _game.PlayOnceTime(Convert.ToInt32(position));
             this.CurrentPlayer = _game.GetIdCurrentPlayer();
-            //this.PrintCurrentPlayer = 
+            this.PrintCurrentPlayer = this.CurrentPlayer == 1 ? "1 Ficha: X" : "2 Ficha: O ";
             return canPlay;
         }
 
@@ -62,7 +62,6 @@ namespace GUI.ViewModels
             {
                 _currentPlayer = value;
                 OnPropertyChanged(nameof(CurrentPlayer));
-                OnPropertyChanged(nameof(PrintCurrentPlayer));
             }
         }
 
@@ -70,19 +69,13 @@ namespace GUI.ViewModels
         public string PrintCurrentPlayer
         {
             get
-            {
-                if (_currentPlayer == 1)
-                {
-                    _printcurrentPlayer = "1 Ficha: X";                 
-
-                }
-                else
-                {
-                    _printcurrentPlayer = "2 Ficha: O ";
-                }
-
-                
+            {               
                 return _printcurrentPlayer;
+            }
+            set
+            {
+                _printcurrentPlayer = value;
+                OnPropertyChanged(nameof(PrintCurrentPlayer));
             }
         }
 
@@ -209,6 +202,7 @@ namespace GUI.ViewModels
         public void Reset()
         {
             this.CurrentPlayer = 1;
+            this.PrintCurrentPlayer = this.CurrentPlayer == 1 ? "1 Ficha: X" : "2 Ficha: O ";
             this._game = new GameController();
         }
 
