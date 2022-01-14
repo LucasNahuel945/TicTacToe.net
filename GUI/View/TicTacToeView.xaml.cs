@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.IO;
 using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace GUI.View
 {
@@ -16,10 +17,15 @@ namespace GUI.View
     {
         private TicTacToeViewModel _vm;
         private Dictionary<int, string> _symbolplayer;
+        private MediaPlayer _mediaPlayer;
+
         public TicTacToeView()
         {
             InitializeComponent();
+
+            this._mediaPlayer = new MediaPlayer();
             StartMusic();
+
             this._vm = new TicTacToeViewModel();
             DataContext = this._vm;
             
@@ -89,15 +95,20 @@ namespace GUI.View
         public void ResetGame()
         {
             new TicTacToeView().Show();
+            this._mediaPlayer.Stop();
             this.Close();
         }
 
         public void StartMusic()
         {
-            string path = Path.GetFullPath("..\\..\\Music\\musicaFondo.wav");
-            string uri = path;
-            SoundPlayer player = new SoundPlayer(uri);
-            player.Play();
+
+            string currentDir = Environment.CurrentDirectory;
+            string localPath = "../Music/musicaFondo.wav";
+            string fullPath = Path.GetFullPath(Path.Combine(currentDir, @"..\..\" + localPath));
+
+            this._mediaPlayer.Open(new Uri(fullPath));
+            this._mediaPlayer.Play();
+            this._mediaPlayer.Volume = 5 / 100.0f;
         }
 
 

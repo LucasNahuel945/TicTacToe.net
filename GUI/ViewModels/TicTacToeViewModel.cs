@@ -30,6 +30,7 @@ namespace GUI.ViewModels
         {
             bool canPlay = _game.PlayOnceTime(Convert.ToInt32(position));
             this.CurrentPlayer = _game.GetIdCurrentPlayer();
+            //this.PrintCurrentPlayer = 
             return canPlay;
         }
 
